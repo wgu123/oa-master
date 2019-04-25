@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @Author: w
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_info")
 @NoArgsConstructor
-public class UserInfo {
+public class UserInfo implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;

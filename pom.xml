@@ -20,6 +20,7 @@
         <module>oa-db</module>
         <module>oa-common</module>
         <module>oa-tools</module>
+        <module>oa-logging</module>
     </modules>
 
     <!--依赖包版本控制-->
@@ -43,9 +44,30 @@
         <commons-pool2.version>2.5.0</commons-pool2.version>
         <!--实体转换工具-->
         <mapstruct.version>1.2.0.Final</mapstruct.version>
+        <!--jwt token-->
         <jsonwebtoken.version>0.7.0</jsonwebtoken.version>
+        <!--jedis 缓存-->
+        <jedis.version>2.9.0</jedis.version>
     </properties>
     <dependencies>
+        <!--工具包-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+        <!--mapStruct依赖 映射框架-->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-jdk8</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapstruct.version}</version>
+            <scope>provided</scope>
+        </dependency>
         <!--jwt token-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -53,9 +75,11 @@
             <version>0.9.1</version>
         </dependency>
         <!-- redis依赖 -->
+        <!--jedis-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
         </dependency>
         <!-- swagger-ui 接口文档-->
         <dependency>
@@ -105,6 +129,18 @@
             <version>${log4jdbc.version}</version>
         </dependency>
         <!--Spring boot start-->
+        <!-- redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <!--去除生菜 避免冲突-->
+            <exclusions>
+                <exclusion>
+                    <groupId>io.lettuce</groupId>
+                    <artifactId>lettuce-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <!--jpa 持久层ORM框架-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

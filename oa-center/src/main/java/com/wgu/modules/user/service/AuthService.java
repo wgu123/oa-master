@@ -1,6 +1,7 @@
 package com.wgu.modules.user.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wgu.modules.user.dto.UserDTO;
 import com.wgu.modules.user.vo.LoginVO;
 
 /**
@@ -15,4 +16,10 @@ public interface AuthService {
      * @return
      */
     JSONObject login(LoginVO loginVO);
+
+    /**
+     * 获取用户信息
+     * @return
+     */
+    UserDTO getUserInfo();
 }

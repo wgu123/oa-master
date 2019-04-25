@@ -16,6 +16,7 @@
       <module name="oa-center" target="1.8" />
       <module name="oa-common" target="1.8" />
       <module name="oa-db" target="1.8" />
+      <module name="oa-logging" target="1.8" />
       <module name="oa-master" target="1.8" />
       <module name="oa-tools" target="1.8" />
     </bytecodeTargetLevel>

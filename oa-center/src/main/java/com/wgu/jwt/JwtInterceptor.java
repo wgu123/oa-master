@@ -52,7 +52,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         if (method.isAnnotationPresent(UserLoginToken.class)) {
             UserLoginToken userLoginToken = method.getAnnotation(UserLoginToken.class);
             if (userLoginToken.required()&&claims==null) {
-                log.info("未登录");
+                log.info("===== 用户未登录, 请先登录 =====");
                 throw new MyException(401,"未登录");
             }
         }
@@ -66,12 +66,11 @@ public class JwtInterceptor implements HandlerInterceptor {
      */
     private Claims getClaims(String authHeader){
         if (StringUtils.isEmpty(authHeader)) {
-            log.info("===== 用户未登录, 请先登录 =====");
             return null;
         }
         // 校验头格式校验
         if (!JwtUtils.validate(authHeader)) {
-            log.info("===== token格式异常 =====");
+            log.info("===== 用户未登录, 请先登录 =====");
             return null;
         }
         // token解析
