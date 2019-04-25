@@ -1,8 +1,10 @@
 package com.wgu.modules.user.rest;
 
 import com.wgu.annotations.PassToken;
+import com.wgu.global.Result;
 import com.wgu.jwt.JwtParam;
 import com.wgu.jwt.JwtUtils;
+import com.wgu.modules.user.service.AuthService;
 import com.wgu.modules.user.service.UserService;
 import com.wgu.modules.user.vo.LoginVO;
 import lombok.extern.slf4j.Slf4j;
@@ -23,27 +25,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
     private final UserService userService;
-    private final JwtParam jwtParam;
+    final
+    AuthService authService;
 
     @Autowired
-    public AuthController(UserService userService, JwtParam jwtParam) {
+    public AuthController(UserService userService, JwtParam jwtParam, AuthService authService) {
         this.userService = userService;
-        this.jwtParam = jwtParam;
+        this.authService = authService;
     }
 
     // 登录
     @PostMapping("/login")
     @PassToken // 加此注解, 请求不做token验证
-    public String login(@RequestBody LoginVO loginVO) {
-        // 1.用户密码验证我这里忽略, 假设用户验证成功, 取得用户id为5
-        Integer userId = 5;
-        // 2.验证通过生成token
-        String token = JwtUtils.createToken(userId + "", jwtParam);
-        if (token == null) {
-            log.error("===== 用户签名失败 =====");
-            return null;
-        }
-        log.info("===== 用户{}生成签名{} =====", userId, token);
-        return JwtUtils.getAuthorizationHeader(token);
+    public Result login(@RequestBody LoginVO loginVO) {
+        return Result.ok(authService.login(loginVO));
     }
 }
