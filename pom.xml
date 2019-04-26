@@ -20,7 +20,6 @@
         <module>oa-db</module>
         <module>oa-common</module>
         <module>oa-tools</module>
-        <module>oa-logging</module>
     </modules>
 
     <!--依赖包版本控制-->

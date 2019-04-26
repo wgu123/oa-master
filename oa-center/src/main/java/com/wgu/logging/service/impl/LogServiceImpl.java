@@ -71,8 +71,8 @@ public class LogServiceImpl implements LogService {
         // 获取IP地址
         log.setRequestIp(MyStringUtils.getIP(request));
 
-        if(!LOGINPATH.equals(signature.getName())){
-            UserDTO userDTO = authService.getUserInfo();
+        UserDTO userDTO = authService.getUserInfo();
+        if(userDTO!=null){
             username = userDTO.getUsername();
         } else {
             try {
