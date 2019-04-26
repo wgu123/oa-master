@@ -9,6 +9,7 @@ import com.wgu.modules.user.service.AuthService;
 import com.wgu.modules.user.vo.LoginVO;
 import com.wgu.utils.ValidatorUtils;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ public class AuthController {
     // 登录
     @Log("用户登录")
     @PostMapping("/login")
+    @ApiOperation(value = "用户登录")
     @PassToken // 加此注解, 请求不做token验证
     public Result login(@RequestBody LoginVO loginVO) {
         ValidatorUtils.validateEntity(loginVO, SelectGroup.class);
